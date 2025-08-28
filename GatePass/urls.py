@@ -17,7 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.site.site_header = "GatePass Admin"
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('resident/', include('resident.urls')),
+
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
+    path('api/', include('resident.urls')),
 ]
