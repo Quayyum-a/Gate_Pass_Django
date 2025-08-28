@@ -15,7 +15,8 @@ from .serializers import HouseSerializer
 def add_house(request):
     serializer = HouseSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    user = get_object_or_404(User, pk=serializer.validated_data['user'])
+    user = request.user
+    user = get_object_or_404(User, pk=user.pk)
     if user.is_resident:
         House.objects.create(
             house_number=serializer.validated_data['house_number'],
